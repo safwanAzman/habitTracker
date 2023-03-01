@@ -2,13 +2,13 @@ import Constants from 'expo-constants';
 
 const ENV = {
     dev: {
-        endpoint: 'http://127.0.0.1:8000/api'
+        endpoint: 'https://5615-175-137-223-211.ap.ngrok.io/api'
     },
     staging: {
-        endpoint: 'http://127.0.0.1:8000/api'
+        endpoint: 'https://5615-175-137-223-211.ap.ngrok.io/api'
     },
     prod: {
-        endpoint: 'http://127.0.0.1:8000/api'
+        endpoint: 'https://5615-175-137-223-211.ap.ngrok.io/api'
     }
 }
 
