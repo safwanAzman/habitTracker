@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View,Text,Pressable } from 'react-native';
+import { View,Text,Pressable,Alert } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from "yup";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -18,30 +18,35 @@ export default function RegisterScreen({navigation}) {
         name: Yup.string().required("username Required"),
         email: Yup.string().required("Email Required"),
         password: Yup.string().required("Password Required"),
-        password_confirmation: Yup.string()
-        .required("confirm password Required")
-        .test("passwords-match", "Passwords must match", function (value) {
-            return this.parent.password === value;
-        }),
+        password_confirmation: Yup.string().required("confirm password Required")
     });
 
     const register = async (data,actions) => {
         try{
             handlingLoading();
             const result = await apiRegister(data);
-            console.log(result);
+            if(result.status === 200){
+                Alert.alert(
+                    "Succsess",
+                    result.message,
+                    [
+                        {
+                            text: "OK",
+                            onPress: () =>  navigation.navigate('Login'),
+                        }
+                    ]
+                );
+            }
             handlingLoading();
         } catch (e) {
-            handlingLoading();
+            console.log(e);
             if(e.status === 422 ){
-                const errors = e.data.errors;
-                console.log(errors)
+                const errors = e.data.validation_errors;
                 Object.keys(errors).forEach(function (key){
                     actions.setFieldError(key,errors[key][0]);
                 });
-            }else if(e.status === 200){
-                alert(e.data.message)
             }
+            handlingLoading();
         }
     };
     
