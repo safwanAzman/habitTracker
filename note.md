@@ -12,9 +12,8 @@ yarn add @react-navigation/bottom-tabs
 npx expo install expo-secure-store
 yarn add react-native-keyboard-aware-scroll-view
 
-//doc
-https://hossein-zare.github.io/react-native-dropdown-picker-website/docs/usage#onchangevalue
-yarn add react-native-dropdown-picker 
+
+yarn add react-native-picker-select
 
 npx expo install expo-checkbox
 yarn add moment  
