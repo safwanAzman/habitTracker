@@ -1,9 +1,11 @@
 import * as React from "react";
 import { StyleSheet, Pressable, View } from 'react-native';
-import {FontAwesome,MaterialCommunityIcons,Ionicons,} from '@expo/vector-icons';
+import {FontAwesome,MaterialCommunityIcons,Ionicons,AntDesign} from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/home/HomeScreen";
 import TestScreen from "../screens/test/TestScreen";
+import TaskScreen from "../screens/tasks/TaskScreen";
+import SettingScreen from "../screens/settings/SettingScreen";
 import { theme } from "../theme/index";
 
 // Route for bottom navigator
@@ -26,45 +28,33 @@ export const TabBottomStack = () => (
         options={{
             headerShown: false,
             tabBarIcon: ({focused}) => (
-                <FontAwesome  name="home" size={30} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
+                <Ionicons  name="pie-chart-outline" size={35} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
             ),
-            tabBarLabel: "Home",
+            tabBarLabel: "",
         }}
     />
 
     <BottomNavigator.Screen 
-        name="test1" 
-        component={TestScreen} 
+        name="AddTask" 
+        component={TaskScreen} 
         options={{
             headerShown: false,
             tabBarIcon: ({focused}) => (
-                <Ionicons name="md-receipt-sharp" size={30} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
+                <MaterialCommunityIcons name="chart-box-plus-outline" size={35} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
             ),
-            tabBarLabel: "test1",
+            tabBarLabel: "",
         }}
     />
 
     <BottomNavigator.Screen 
-        name="test2" 
-        component={TestScreen} 
+        name="Setting" 
+        component={SettingScreen} 
         options={{
             headerShown: false,
             tabBarIcon: ({focused}) => (
-                <MaterialCommunityIcons name="shopping" size={30} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
+                <Ionicons name="settings-outline" size={35} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
             ),
-            tabBarLabel: "test2",
-        }}
-    />
-
-    <BottomNavigator.Screen 
-        name="test3" 
-        component={TestScreen} 
-        options={{
-            headerShown: false,
-            tabBarIcon: ({focused}) => (
-                <FontAwesome name="user-circle" size={30} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
-            ),
-            tabBarLabel: "test3",
+            tabBarLabel: "",
         }}
     />
 
@@ -76,7 +66,7 @@ const styles = StyleSheet.create({
         backgroundColor: Platform.OS === "android" ? theme.colors.default : theme.colors.botomTab,
         padding:8,
         height:70,
-        paddingBottom:10
+        paddingBottom:2
     },
     tabLabel:{
         fontSize:12,
