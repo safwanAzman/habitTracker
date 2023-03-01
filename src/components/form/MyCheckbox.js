@@ -24,9 +24,10 @@ export default function MyCheckbox({value,onValueChange,disabled,label}) {
     ## EXAMPLE CALL MYCHECKBOX COMPONENT
     const [isChecked, setChecked] = useState(false);
     <MyCheckbox
-    label="Label"
-    value={isChecked}
-    disabled={true}
-    onValueChange={setChecked}
-    color={isChecked ? '#4630EB' : undefined}
-/> */}
+        label="Label"
+        value={isChecked}
+        disabled={true}
+        onValueChange={setChecked}
+        color={isChecked ? '#4630EB' : undefined}
+    /> 
+*/}
