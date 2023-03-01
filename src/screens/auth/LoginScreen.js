@@ -28,16 +28,14 @@ export default function LoginScreen({navigation}) {
         try{
             handlingLoading();
             const result = await apiLogin(data);
-            console.log(result);
-            await SecureStore.setItemAsync('token',result.data.token);
             handlingLoading();
+            await SecureStore.setItemAsync('token',result.token);
             signIn(true);
         } catch (e) {
-            console.log(e)
-            handlingLoading();
             if(e.status === 401){
                 alert(e.data.message)
             }
+            handlingLoading();
         }
     };
 
@@ -47,7 +45,7 @@ export default function LoginScreen({navigation}) {
                 <Formik
                     validationSchema={Schema}
                     initialValues={{ 
-                        email: 'safwan@test.com' ,
+                        email: 'Safwan@gmail.com' ,
                         password:'password' 
                     }}
                     onSubmit={(values,actions)=>{
@@ -93,13 +91,13 @@ export default function LoginScreen({navigation}) {
                                     errorMessage={errors.password && touched.password ? errors.password : null}
                                 />
                             </View>
-                            <View className="flex flex-row justify-end px-2 py-2">
+                            {/* <View className="flex flex-row justify-end px-2 py-2">
                                 <Pressable onPress={() => navigation.navigate('ForgotPassword')}>
                                     <Text className="text-sm font-semibold" style={{color:theme.colors.main}}>
                                         Forgot your password ?
                                     </Text>
                                 </Pressable>
-                            </View>
+                            </View> */}
                             <View className="mt-4">
                                 <Btnsubmit
                                     title="Sign In"
