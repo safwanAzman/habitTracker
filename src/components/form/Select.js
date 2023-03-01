@@ -1,41 +1,49 @@
 import React, { useState } from 'react';
 import {Text} from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { theme } from '../../theme';
 
-export default function Select({ errorMessage, placeholder, label, options,zIndex,zIndexInverse,onChangeValue,onSelectItem ,passSetValue}) {
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(passSetValue);
-    const [items, setItems] = useState(options);
+import RNPickerSelect from "react-native-picker-select";
 
-    const handleValueChange = (itemValue) => {
-        setValue(itemValue);
-        onChangeValue && onChangeValue(itemValue);
-    };
+export default function Select({ errorMessage, label, onValueChange, items, placeholder, value}) {
 
     return (
     <>
         <Text className={`text-sm font-semibold  pl-1 ${errorMessage ? 'text-red-500 ' : 'text-gray-900'}`}>
             {label}
         </Text>
-        <DropDownPicker
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            onChangeValue={handleValueChange}
-            onSelectItem={onSelectItem}
-            setItems={setItems}
-            style={{
-                borderColor: errorMessage ? '#ef4444' : '#cbd5e1'
-            }}
-            dropDownContainerStyle={{
-                borderColor: errorMessage ? '#ef4444' : '#cbd5e1'
-            }}
-            zIndex={zIndex}
-            zIndexInverse={zIndexInverse}
-            placeholder={placeholder}
-        />
+        <RNPickerSelect
+        style={{
+        placeholder: {
+            fontSize: 12,
+            color: "#9e9e9e",
+        },
+        inputIOS: {
+            fontSize: 12,
+            borderWidth: 1,
+            borderColor:  errorMessage ? '#ef4444' : '#cbd5e1',
+            borderRadius: 6,
+            padding: 17,
+            backgroundColor: theme.colors.white,
+            color: theme.colors.black,
+            },
+            inputAndroid: {
+            fontSize: 12,
+            borderWidth: 1,
+            borderColor:  errorMessage ? '#ef4444' : '#cbd5e1',
+            borderRadius: 10,
+            paddingVertical: 9,
+            paddingHorizontal: 20,
+            backgroundColor: "white",
+            color: theme.colors.black,
+            }
+        }}
+        key={true}
+        value={value}
+        useNativeAndroidPickerStyle={false}
+        onValueChange={onValueChange}
+        items={items}
+        placeholder={placeholder}
+    />
         <Text className={`text-sm font-semibold pl-1 text-red-500 pt-1 ${errorMessage ? 'block' : 'hidden'}`}>
         {errorMessage}
         </Text>
