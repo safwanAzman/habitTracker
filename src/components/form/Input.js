@@ -45,7 +45,7 @@ export default  function Input({errorMessage ,placeholder,onChangeText,value,edi
                 <Pressable 
                 onPress={onPress}
                 className={`
-                absolute right-0 px-4 
+                absolute w-full items-end px-4 
                 `}
                 style={{ top:Platform.OS === "android" ? 30 :  label ? 33 : 28}}
                 >
