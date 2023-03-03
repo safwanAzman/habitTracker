@@ -46,17 +46,12 @@ export default function TaskDailyScreen({navigation}) {
         return task.task_name.toLowerCase().includes(searchQuery.toLowerCase());
     });    
     
-    useEffect(() => {
-        getdailyTask();
-    }, []);
-
     useFocusEffect(
         useCallback(() => {
             getdailyTask();
         }, [])
     );
 
-    
     return (
         <>
             <BtnBack/>
@@ -111,7 +106,7 @@ export default function TaskDailyScreen({navigation}) {
                                                 High Level
                                             </Text>
                                             }
-                                            <Text className="text-xs font-semibold">{item.item.expired}</Text>
+                                            <Text className="text-xs font-semibold">{item.item.status == 'complete' ? 'Complete' : item.item.expired}</Text>
                                         </View>
                                     </View>
                                 </View>
