@@ -1,16 +1,42 @@
 import * as React from "react";
 import { StyleSheet, Pressable, View } from 'react-native';
-import {FontAwesome,MaterialCommunityIcons,Ionicons,AntDesign} from '@expo/vector-icons';
+import {FontAwesome,MaterialCommunityIcons,Ionicons,AntDesign,MaterialIcons} from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../screens/home/HomeScreen";
 import TestScreen from "../screens/test/TestScreen";
 import TaskScreen from "../screens/tasks/TaskScreen";
 import SettingScreen from "../screens/settings/SettingScreen";
 import { theme } from "../theme/index";
+import * as SecureStore from 'expo-secure-store';
+
+import { AuthContext } from '../context/auth/AuthContext';
+import { apiLogout } from '../services/tasks';
+
+
 
 // Route for bottom navigator
+
 const BottomNavigator = createBottomTabNavigator();
-export const TabBottomStack = () => (
+
+
+
+export const TabBottomStack = () => {
+    const { signOut,handlingLoading  } = React.useContext(AuthContext);
+    const logout = async () => {
+        try{
+            handlingLoading();
+            const result = await apiLogout();
+            await SecureStore.deleteItemAsync('token');
+            handlingLoading();
+            signOut(true);
+        } catch (e) {
+            console.log(e);
+            alert(e.data.message)
+            handlingLoading();
+        }
+    };
+
+    return (
     <BottomNavigator.Navigator
         screenOptions={{
             tabBarStyle:styles.tabContainer,
@@ -48,18 +74,21 @@ export const TabBottomStack = () => (
 
     <BottomNavigator.Screen 
         name="Setting" 
-        component={SettingScreen} 
+        component={HomeScreen} 
         options={{
             headerShown: false,
             tabBarIcon: ({focused}) => (
-                <Ionicons name="settings-outline" size={35} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
+                <Pressable onPress={() => logout()}>
+                    <MaterialIcons name="logout" size={35} color={focused ? theme.colors.activeTintColor: theme.colors.inactiveColor} />
+                </Pressable>
             ),
             tabBarLabel: "",
         }}
     />
 
     </BottomNavigator.Navigator>
-);
+    );
+};
 
 const styles = StyleSheet.create({
     tabContainer:{
