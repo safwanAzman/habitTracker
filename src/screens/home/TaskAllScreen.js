@@ -1,5 +1,5 @@
-import React, {useState,useEffect,useCallback,useRef} from 'react'
-import { Text, View,Pressable,FlatList } from 'react-native';
+import React, {useState,useCallback} from 'react'
+import { Text, View,Pressable,FlatList,Alert } from 'react-native';
 import BtnBack from '../../components/btn/BtnBack';
 import Container from '../../components/container';
 import { useFocusEffect } from '@react-navigation/native';
@@ -14,7 +14,8 @@ import Input from '../../components/form/Input'
 import { 
     getApiAllTask,
     getApiUpdateTaskStatus,
-    apiShowTask
+    apiShowTask,
+    apiDeleteTask
 } from '../../services/tasks';
 
 
@@ -42,6 +43,11 @@ export default function TaskAllScreen({navigation}) {
         this[RBSheet + id].close()
     }
 
+    const deleteTask = async (id) => {
+        const result = await apiDeleteTask(id);
+        getAllTask();
+    }
+
     const filteredData = allData.filter(task => {
         return task.task_name.toLowerCase().includes(searchQuery.toLowerCase());
     });    
@@ -58,7 +64,7 @@ export default function TaskAllScreen({navigation}) {
             <Container>
                 <View className="mb-1 space-y-1">
                     <Text className="text-3xl font-bold">All Task</Text>
-                    <Text className="text-lg text-gray-600 ">Complete Your ALl Task 🌟</Text>
+                    <Text className="text-lg text-gray-600 ">Complete Your All Task 🌟</Text>
                 </View>
                 <View className="mb-4">
                     <Input
