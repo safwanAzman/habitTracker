@@ -8,6 +8,7 @@ import { theme } from '../../theme';
 // component
 import Input from '../../components/form/Input';
 import Btnsubmit from '../../components/btn/BtnSubmit';
+import BtnBack from '../../components/btn/BtnBack';
 
 import { AuthContext } from '../../context/auth/AuthContext';
 import { apiRegister } from '../../services/auth';
@@ -52,6 +53,7 @@ export default function RegisterScreen({navigation}) {
     
     return (
         <View className="flex-1">
+            <BtnBack/>
             <KeyboardAwareScrollView  showsVerticalScrollIndicator={false} bounces={false} >
                 <Formik
                     validationSchema={SignUpSchema}
