@@ -63,7 +63,7 @@ export default function LoginScreen({navigation}) {
                                 resizeMode="cover"
                                 shouldPlay
                                 isLooping
-                                volume={0}
+                                volume={1.0}
                             />
                         </View>
                         <View className="mx-5 mt-5">
