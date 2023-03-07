@@ -1,5 +1,5 @@
 import React, {useState,useCallback} from 'react'
-import { Text, View,Pressable,FlatList } from 'react-native';
+import { Text, View,Pressable,FlatList,Alert } from 'react-native';
 import BtnBack from '../../components/btn/BtnBack';
 import Container from '../../components/container';
 import { useFocusEffect } from '@react-navigation/native';
@@ -14,7 +14,8 @@ import Input from '../../components/form/Input'
 import { 
     getApiMonthlyTask,
     getApiUpdateTaskStatus,
-    apiShowTask
+    apiShowTask,
+    apiDeleteTask
 } from '../../services/tasks';
 
 
@@ -44,7 +45,12 @@ export default function TaskMonthlyScreen({navigation}) {
 
     const filteredData = monthlyData.filter(task => {
         return task.task_name.toLowerCase().includes(searchQuery.toLowerCase());
-    });    
+    }); 
+    
+    const deleteTask = async (id) => {
+        const result = await apiDeleteTask(id);
+        getMonthlyTask();
+    }
     
     useFocusEffect(
         useCallback(() => {
