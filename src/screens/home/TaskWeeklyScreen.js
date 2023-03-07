@@ -1,5 +1,5 @@
-import React, {useState,useEffect,useCallback,useRef} from 'react'
-import { Text, View,Pressable,FlatList } from 'react-native';
+import React, {useState,useCallback} from 'react'
+import { Text, View,Pressable,FlatList,Alert } from 'react-native';
 import BtnBack from '../../components/btn/BtnBack';
 import Container from '../../components/container';
 import { useFocusEffect } from '@react-navigation/native';
@@ -14,7 +14,8 @@ import Input from '../../components/form/Input'
 import { 
     getApiWeeklyTask,
     getApiUpdateTaskStatus,
-    apiShowTask
+    apiShowTask,
+    apiDeleteTask
 } from '../../services/tasks';
 
 
@@ -40,6 +41,11 @@ export default function TaskWeeklyScreen({navigation}) {
         const result = await apiShowTask(id);
         navigation.navigate('UpdateTask',{showData:result.tasks})
         this[RBSheet + id].close()
+    }
+
+    const deleteTask = async (id) => {
+        const result = await apiDeleteTask(id);
+        getweeklyTask();
     }
 
     const filteredData = weeklyData.filter(task => {
