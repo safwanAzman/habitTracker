@@ -1,4 +1,4 @@
-import React, {useState,useEffect,useCallback,useRef} from 'react'
+import React, {useState,useCallback,Alert} from 'react'
 import { Text, View,Pressable,FlatList } from 'react-native';
 import BtnBack from '../../components/btn/BtnBack';
 import Container from '../../components/container';
@@ -14,7 +14,8 @@ import Input from '../../components/form/Input'
 import { 
     getApiDailyTask,
     getApiUpdateTaskStatus,
-    apiShowTask
+    apiShowTask,
+    apiDeleteTask
 } from '../../services/tasks';
 
 
@@ -40,6 +41,11 @@ export default function TaskDailyScreen({navigation}) {
         const result = await apiShowTask(id);
         navigation.navigate('UpdateTask',{showData:result.tasks})
         this[RBSheet + id].close()
+    }
+
+    const deleteTask = async (id) => {
+        const result = await apiDeleteTask(id);
+        getdailyTask();
     }
 
     const filteredData = dailyData.filter(task => {
