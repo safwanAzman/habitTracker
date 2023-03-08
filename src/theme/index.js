@@ -2,13 +2,13 @@ export const theme = {
     colors:{
 
         //main colors
-        main:'#317773',
+        main:'#201E20',
         hover:'#F8C950',
         default:'#fff',
 
         //general colors
         inactiveColor:"#B4B4B4",
-        activeTintColor:"#317773",
+        activeTintColor:"#2A2A2A",
         botomTab:'#FFFFF',
         black:'#000000',
         lightGray:'#FBFBFB',
